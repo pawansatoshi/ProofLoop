@@ -1,0 +1,1 @@
+Dependencies are intentionally kept minimal. Run `npm install` to generate the local lockfile in the development environment before final submission if a lockfile is desired.
