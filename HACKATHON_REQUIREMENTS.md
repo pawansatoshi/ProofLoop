@@ -1,6 +1,6 @@
 # Hackathon Compliance Checklist
 
-This file distinguishes repository facts from externally verified submission facts. The official Kane CLI Online Hackathon brief says the app must work end-to-end, Kane must actually catch or prove something meaningful, the agent and Kane must interact, and the submission must include a repository, a <=3-minute demo, a one-paragraph explanation, and a live URL or one-command runnable path. citeturn4search0
+This file distinguishes repository facts from externally verified submission facts. The official Kane CLI Online Hackathon brief says the app must work end-to-end, Kane must actually catch or prove something meaningful, the agent and Kane must interact, and the submission must include a repository, a <=3-minute demo, a one-paragraph explanation, and a live URL or one-command runnable path.
 
 ## Repository implementation
 
@@ -50,8 +50,8 @@ This file distinguishes repository facts from externally verified submission fac
 
 ## Repository timing rule
 
-The official brief says the repo must be initialized after the kickoff and that commit history is checked. Current repository commits begin on 20 August 2026, after the stated 19 August kickoff date in the rules section. Verify the exact kickoff/submission timing against the submission form before final submission. citeturn4search0
+The official brief says the repo must be initialized after the kickoff and that commit history is checked. Current repository commits begin on 20 August 2026, after the stated 19 August kickoff date in the rules section. Verify the exact kickoff/submission timing against the submission form before final submission.
 
 ## Date note
 
-The currently published event page contains conflicting date text in different sections. Its challenge section and submission section mention 21 August, while another schedule section mentions 31 August. Treat the submission form/current organizer instruction as authoritative for the final deadline rather than relying on this repository document. citeturn4search0
+The currently published event page contains conflicting date text in different sections. Its challenge section and submission section mention 21 August, while another schedule section mentions 31 August. Treat the submission form/current organizer instruction as authoritative for the final deadline rather than relying on this repository document.
