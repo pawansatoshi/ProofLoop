@@ -1,6 +1,7 @@
 ---
 mode: testing
 url: http://127.0.0.1:5173/
+headless: true
 max_steps: 45
 tags: [proofloop, proofboard, release, smoke]
 ---
