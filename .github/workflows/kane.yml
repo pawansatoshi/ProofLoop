@@ -1,0 +1,39 @@
+name: Kane Verification
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  kane:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install app dependencies
+        run: npm install --no-audit --no-fund
+      - name: Install Kane CLI
+        run: npm install -g @testmuai/kane-cli@0.7.0
+      - name: Start ProofLoop
+        run: |
+          npm run dev -- --host 127.0.0.1 > /tmp/proofloop-vite.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:5173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/proofloop-vite.log
+          exit 1
+      - name: Authenticate Kane
+        env:
+          LT_USERNAME: ${{ secrets.LT_USERNAME }}
+          LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
+        run: kane-cli login --username "$LT_USERNAME" --access-key "$LT_ACCESS_KEY"
+      - name: Run ProofBoard verification
+        run: npm run verify:kane
