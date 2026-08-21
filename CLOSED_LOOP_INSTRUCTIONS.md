@@ -1,0 +1,1 @@
+Use the genuine Kane run as the failing test oracle. The coding agent must inspect evidence, repair root cause, and rerun the same test. Do not alter assertions to force PASS.
