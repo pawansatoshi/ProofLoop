@@ -69,10 +69,12 @@ jobs:
         run: npm run verify:kane 2>&1 | tee /tmp/kane-local.log
 
       - name: Wait for Vercel production
+        env:
+          PRODUCTION_URL: https://proof-loop-pawansatoshis-projects.vercel.app/
         run: |
-          echo 'Waiting for production deployment to be reachable...'
+          echo "Waiting for production deployment at $PRODUCTION_URL..."
           for i in {1..90}; do
-            if curl -fsS https://proof-loop-bice.vercel.app/ >/dev/null; then
+            if curl -fsS "$PRODUCTION_URL" >/dev/null; then
               echo 'Production endpoint is reachable'
               exit 0
             fi
@@ -81,6 +83,8 @@ jobs:
           exit 1
 
       - name: Run production ProofBoard verification
+        env:
+          PRODUCTION_URL: https://proof-loop-pawansatoshis-projects.vercel.app/
         run: npm run verify:kane:production 2>&1 | tee /tmp/kane-production.log
 
       - name: Upload Kane evidence and logs
