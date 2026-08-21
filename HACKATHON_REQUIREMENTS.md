@@ -9,22 +9,21 @@ This file distinguishes repository facts from externally verified submission fac
 - [x] Real ProofBoard primary flow
 - [x] Five requirement model
 - [x] Committed Kane local `_test.md` flow
-- [x] Committed Kane production `_test.md` flow targeting the Vercel deployment
+- [x] Committed Kane production `_test.md` flow targeting the canonical Vercel deployment
 - [x] `npm run verify:kane` command with agent/headless NDJSON output
 - [x] `npm run verify:kane:production` command
 - [x] `npm run verify:loop` agent-facing self-healing loop runner
 - [x] `AGENTS.md` defines the Kane failure → root-cause fix → rerun protocol
-- [x] GitHub Actions Kane workflow with local + production verification, real Chrome, authenticated headless execution, and evidence artifacts
+- [x] GitHub Actions Kane workflow with local + production verification, real Chrome, non-interactive authenticated headless execution, and evidence artifacts
 - [x] Kane workflow runs on main pushes and can also be dispatched manually
 - [x] GitHub Actions CI typecheck + lint + build + dependency audit workflow
-- [x] GitHub Pages deployment workflow retained as fallback
 - [x] Vercel production project configured from the GitHub repository
 - [x] Latest Vercel production deployment reached READY after the release-gate fixes
 - [x] README setup and deployment instructions
 
 ## External verification still required
 
-- [ ] Real Kane CLI authentication
+- [ ] Real Kane CLI authentication in GitHub Actions with valid `LT_USERNAME` and `LT_ACCESS_KEY` repository secrets
 - [ ] Real Kane browser execution against ProofBoard
 - [ ] Genuine Kane evidence pack reviewed
 - [ ] Actual agent-triggered Kane run and repair interaction demonstrated
@@ -64,11 +63,7 @@ Primary live URL for submission:
 
 `https://proof-loop-bice.vercel.app/`
 
-Fallback deployment path:
-
-`https://pawansatoshi.github.io/ProofLoop/`
-
-The Vercel deployment is the preferred judge-facing URL because it is the current primary production deployment for the repository.
+Vercel is the single judge-facing production deployment. GitHub Pages is intentionally not used as a release gate because the repository does not require a Pages environment for the hackathon submission.
 
 ## Repository timing rule
 
