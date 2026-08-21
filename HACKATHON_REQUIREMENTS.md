@@ -8,12 +8,15 @@ This file distinguishes repository facts from externally verified submission fac
 - [x] React + TypeScript + Vite app
 - [x] Real ProofBoard primary flow
 - [x] Five requirement model
-- [x] Committed Kane `_test.md` flow
+- [x] Committed Kane local `_test.md` flow
+- [x] Committed Kane production `_test.md` flow targeting the Vercel deployment
 - [x] `npm run verify:kane` command
 - [x] Manual GitHub Actions Kane workflow
 - [x] GitHub Actions build/typecheck workflow
-- [x] GitHub Pages deployment workflow
-- [x] README setup instructions
+- [x] GitHub Pages deployment workflow retained as fallback
+- [x] Vercel production project configured from the GitHub repository
+- [x] Vercel production deployment reached READY after the `createRoot` build fix
+- [x] README setup and deployment instructions
 
 ## External verification still required
 
@@ -21,7 +24,7 @@ This file distinguishes repository facts from externally verified submission fac
 - [ ] Real Kane browser execution against ProofBoard
 - [ ] Genuine Kane evidence pack reviewed
 - [ ] Agent-triggered Kane run or Kane result feeding the agent repair loop
-- [ ] Live deployment verified in a real browser
+- [ ] Live Vercel production deployment verified in a real browser
 - [ ] 3-minute demo video recorded with the app and Kane running
 - [ ] One-paragraph submission explanation finalized
 - [ ] Submission form completed
@@ -31,11 +34,12 @@ This file distinguishes repository facts from externally verified submission fac
 ### Ships
 
 - [x] The repository contains a real interactive ProofBoard flow.
-- [ ] Final deployed or one-command runnable flow verified end-to-end from a clean environment.
+- [x] A Vercel production deployment is configured and the latest deployment reached READY.
+- [ ] Final deployed flow verified end-to-end from a clean browser session.
 
 ### Verified
 
-- [x] Kane test definition is committed.
+- [x] Kane test definitions are committed for local and production flows.
 - [ ] Kane has actually run and produced genuine evidence.
 
 ### Closed loop
@@ -47,6 +51,18 @@ This file distinguishes repository facts from externally verified submission fac
 
 - [x] ProofLoop has a focused evidence-first product narrative.
 - [x] UI explicitly separates controlled demo state from genuine Kane evidence.
+
+## Deployment
+
+Primary live URL for submission:
+
+`https://proof-loop-bice.vercel.app/`
+
+Fallback deployment path:
+
+`https://pawansatoshi.github.io/ProofLoop/`
+
+The Vercel deployment is the preferred judge-facing URL because it is the current primary production deployment for the repository.
 
 ## Repository timing rule
 
