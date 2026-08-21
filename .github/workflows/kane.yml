@@ -65,9 +65,13 @@ jobs:
           exit 1
 
       - name: Run local ProofBoard verification
+        env:
+          LT_USERNAME: ${{ secrets.LT_USERNAME }}
+          LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
         run: |
           kane-cli testmd run .testmuai/tests/proofboard_release_test.md \
             --agent --headless --on-lock-conflict wait --retry \
+            --username "$LT_USERNAME" --access-key "$LT_ACCESS_KEY" \
             2>&1 | tee /tmp/kane-local.log
 
       - name: Wait for Vercel production
@@ -85,9 +89,13 @@ jobs:
           exit 1
 
       - name: Run production ProofBoard verification
+        env:
+          LT_USERNAME: ${{ secrets.LT_USERNAME }}
+          LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
         run: |
           kane-cli testmd run .testmuai/tests/proofboard_production_test.md \
             --agent --headless --on-lock-conflict wait --retry \
+            --username "$LT_USERNAME" --access-key "$LT_ACCESS_KEY" \
             2>&1 | tee /tmp/kane-production.log
 
       - name: Upload Kane evidence and logs
