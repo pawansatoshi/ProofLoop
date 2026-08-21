@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { createRoot } from 'react-dom/client'
-import { Activity, ArrowUpRight, Check, CheckCircle2, CircleDashed, Clock3, Code2, FileCheck2, Github, LockKeyhole, Play, RotateCcw, ShieldCheck, Sparkles, Terminal, X, Zap } from 'lucide-react'
+import { Activity, ArrowUpRight, Check, CheckCircle2, CircleDashed, Clock3, Code2, FileCheck2, LockKeyhole, Play, RotateCcw, ShieldCheck, Sparkles, Terminal, X, Zap } from "lucide-react"
 import './styles.css'
 
 type Status = 'proven' | 'failed' | 'pending'
@@ -85,7 +85,7 @@ function App() {
         </nav>
         <div className="sidebar-bottom">
           <div className="mini-card"><span className="eyebrow">CURRENT BUILD</span><strong>proofboard #001</strong><span className="muted">main · local</span></div>
-          <a className="github-link" href="https://github.com/pawansatoshi/ProofLoop" target="_blank" rel="noreferrer"><Github size={16}/> Repository <ArrowUpRight size={14}/></a>
+          <a className="github-link" href="https://github.com/pawansatoshi/ProofLoop" target="_blank" rel="noreferrer"><Code2 size={16}/> Repository <ArrowUpRight size={14}/></a>
         </div>
       </aside>
 
