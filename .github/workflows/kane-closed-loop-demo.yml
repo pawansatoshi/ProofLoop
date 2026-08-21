@@ -1,0 +1,56 @@
+name: Kane Closed Loop Demo
+
+on:
+  push:
+    branches: [demo/closed-loop-proof]
+
+permissions:
+  contents: read
+
+jobs:
+  kane-demo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Install Kane
+        run: npm install -g @testmuai/kane-cli@0.7.0
+      - name: Authenticate Kane
+        env:
+          LT_USERNAME: ${{ secrets.LT_USERNAME }}
+          LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
+        run: |
+          kane-cli login --username "$LT_USERNAME" --access-key "$LT_ACCESS_KEY"
+          kane-cli whoami
+      - name: Start app
+        run: |
+          npm run dev -- --host 127.0.0.1 --port 5173 > /tmp/proofloop.log 2>&1 &
+          for i in {1..60}; do curl -fsS http://127.0.0.1:5173/ >/dev/null && exit 0 || sleep 1; done
+          cat /tmp/proofloop.log
+          exit 1
+      - name: Run genuine Kane release test
+        env:
+          LT_USERNAME: ${{ secrets.LT_USERNAME }}
+          LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
+        run: |
+          set -o pipefail
+          kane-cli testmd run .testmuai/tests/proofboard_release_test.md --agent --headless --on-lock-conflict wait --username "$LT_USERNAME" --access-key "$LT_ACCESS_KEY" 2>&1 | tee /tmp/kane-loop-demo.log
+      - name: Upload genuine failure/pass evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: proofloop-closed-loop-demo-${{ github.sha }}
+          path: |
+            .testmuai/output/
+            /tmp/kane-loop-demo.log
+            /tmp/proofloop.log
+          if-no-files-found: ignore
+          retention-days: 14
