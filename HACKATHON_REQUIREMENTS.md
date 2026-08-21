@@ -14,7 +14,8 @@ This file distinguishes repository facts from externally verified submission fac
 - [x] `npm run verify:kane:production` command
 - [x] `npm run verify:loop` agent-facing self-healing loop runner
 - [x] `AGENTS.md` defines the Kane failure → root-cause fix → rerun protocol
-- [x] Manual GitHub Actions Kane workflow with local + production verification and artifacts
+- [x] GitHub Actions Kane workflow with local + production verification, real Chrome, authenticated headless execution, and evidence artifacts
+- [x] Kane workflow runs on main pushes and can also be dispatched manually
 - [x] GitHub Actions CI typecheck + lint + build + dependency audit workflow
 - [x] GitHub Pages deployment workflow retained as fallback
 - [x] Vercel production project configured from the GitHub repository
