@@ -1,6 +1,6 @@
 # Hackathon Compliance Checklist
 
-This file distinguishes repository facts from externally verified submission facts. The official Kane CLI Online Hackathon brief says the app must work end-to-end, Kane must actually catch or prove something meaningful, the agent and Kane must interact, and the submission must include a repository, a <=3-minute demo, a one-paragraph explanation, and a live URL or one-command runnable path.
+This file distinguishes repository facts from externally verified submission facts. The official Kane CLI Online Hackathon brief requires a working app, meaningful Kane verification, an agent ↔ Kane interaction, and a short demo plus live URL/runnable path. The judging weights Ships, Verified, Closed loop, and Craft equally, with ties broken on Closed loop.
 
 ## Repository implementation
 
@@ -10,12 +10,15 @@ This file distinguishes repository facts from externally verified submission fac
 - [x] Five requirement model
 - [x] Committed Kane local `_test.md` flow
 - [x] Committed Kane production `_test.md` flow targeting the Vercel deployment
-- [x] `npm run verify:kane` command
-- [x] Manual GitHub Actions Kane workflow
-- [x] GitHub Actions build/typecheck workflow
+- [x] `npm run verify:kane` command with agent/headless NDJSON output
+- [x] `npm run verify:kane:production` command
+- [x] `npm run verify:loop` agent-facing self-healing loop runner
+- [x] `AGENTS.md` defines the Kane failure → root-cause fix → rerun protocol
+- [x] Manual GitHub Actions Kane workflow with local + production verification and artifacts
+- [x] GitHub Actions CI typecheck + lint + build + dependency audit workflow
 - [x] GitHub Pages deployment workflow retained as fallback
 - [x] Vercel production project configured from the GitHub repository
-- [x] Vercel production deployment reached READY after the `createRoot` build fix
+- [x] Latest Vercel production deployment reached READY after the release-gate fixes
 - [x] README setup and deployment instructions
 
 ## External verification still required
@@ -23,8 +26,9 @@ This file distinguishes repository facts from externally verified submission fac
 - [ ] Real Kane CLI authentication
 - [ ] Real Kane browser execution against ProofBoard
 - [ ] Genuine Kane evidence pack reviewed
-- [ ] Agent-triggered Kane run or Kane result feeding the agent repair loop
-- [ ] Live Vercel production deployment verified in a real browser
+- [ ] Actual agent-triggered Kane run and repair interaction demonstrated
+- [x] Vercel production endpoint verified HTTP 200
+- [ ] Vercel production CRUD flow verified in a real browser session
 - [ ] 3-minute demo video recorded with the app and Kane running
 - [ ] One-paragraph submission explanation finalized
 - [ ] Submission form completed
@@ -35,7 +39,7 @@ This file distinguishes repository facts from externally verified submission fac
 
 - [x] The repository contains a real interactive ProofBoard flow.
 - [x] A Vercel production deployment is configured and the latest deployment reached READY.
-- [ ] Final deployed flow verified end-to-end from a clean browser session.
+- [ ] Final deployed CRUD flow verified end-to-end from a clean browser session.
 
 ### Verified
 
@@ -44,13 +48,14 @@ This file distinguishes repository facts from externally verified submission fac
 
 ### Closed loop
 
-- [x] Repository provides a direct `npm run verify:kane` path for an agent to invoke.
-- [ ] Demonstrate the actual agent → Kane trigger and Kane result → repair interaction.
+- [x] Repository provides `npm run verify:loop` for an AI coding agent to invoke Kane in agent/headless mode.
+- [ ] Demonstrate the actual agent → Kane trigger and Kane-result → repair interaction with a genuine run.
 
 ### Craft
 
 - [x] ProofLoop has a focused evidence-first product narrative.
-- [x] UI explicitly separates controlled demo state from genuine Kane evidence.
+- [x] UI separates controlled demo state from genuine Kane evidence.
+- [x] Release approval is impossible from demo fixtures alone.
 
 ## Deployment
 
@@ -66,8 +71,8 @@ The Vercel deployment is the preferred judge-facing URL because it is the curren
 
 ## Repository timing rule
 
-The official brief says the repo must be initialized after the kickoff and that commit history is checked. Current repository commits begin on 20 August 2026, after the stated 19 August kickoff date in the rules section. Verify the exact kickoff/submission timing against the submission form before final submission.
+The official brief requires the repository to be initialized after the kickoff and says commit history is checked. Current repository commits begin on 20 August 2026, after the published 19 August kickoff reference. Verify the exact kickoff/submission timing against the organizer's current submission form/instructions before final submission.
 
 ## Date note
 
-The currently published event page contains conflicting date text in different sections. Its challenge section and submission section mention 21 August, while another schedule section mentions 31 August. Treat the submission form/current organizer instruction as authoritative for the final deadline rather than relying on this repository document.
+The published event page currently contains conflicting date text in different sections. Treat the current organizer/submission form as authoritative for the final deadline.
