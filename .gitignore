@@ -12,3 +12,7 @@ dist/
 *.deb
 vite.config.js
 vite.config.d.ts
+
+# local test evidence and downloaded browser artifacts
+.testmuai/
+*.deb
