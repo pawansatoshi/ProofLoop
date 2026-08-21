@@ -69,8 +69,9 @@ jobs:
           LT_USERNAME: ${{ secrets.LT_USERNAME }}
           LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
         run: |
+          set -o pipefail
           kane-cli testmd run .testmuai/tests/proofboard_release_test.md \
-            --agent --headless --on-lock-conflict wait --retry \
+            --agent --headless --on-lock-conflict wait \
             --username "$LT_USERNAME" --access-key "$LT_ACCESS_KEY" \
             2>&1 | tee /tmp/kane-local.log
 
@@ -93,8 +94,9 @@ jobs:
           LT_USERNAME: ${{ secrets.LT_USERNAME }}
           LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
         run: |
+          set -o pipefail
           kane-cli testmd run .testmuai/tests/proofboard_production_test.md \
-            --agent --headless --on-lock-conflict wait --retry \
+            --agent --headless --on-lock-conflict wait \
             --username "$LT_USERNAME" --access-key "$LT_ACCESS_KEY" \
             2>&1 | tee /tmp/kane-production.log
 
