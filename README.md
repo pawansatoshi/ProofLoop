@@ -60,7 +60,7 @@ npm run dev
 
 Open `http://127.0.0.1:5173/`.
 
-Then authenticate Kane and run:
+For an interactive local run, authenticate Kane with the CLI and then run:
 
 ```bash
 npm install -g @testmuai/kane-cli
@@ -74,6 +74,8 @@ For production verification:
 npm run verify:kane:production
 ```
 
+In CI, Kane uses `LT_USERNAME` and `LT_ACCESS_KEY` GitHub Actions secrets and passes them directly to the headless test command; no interactive login is used.
+
 Every genuine Kane run can produce machine-readable result/evidence artifacts. Do not treat the UI's controlled demo state as a substitute for those artifacts.
 
 ## Build and verification
@@ -86,7 +88,7 @@ npm run build
 npm run verify:loop
 ```
 
-The GitHub Actions CI workflow enforces typecheck, lint, production build, and a high-severity dependency audit. The manual Kane workflow authenticates with GitHub Secrets, runs the local and production flows, and uploads Kane output as a workflow artifact.
+The GitHub Actions CI workflow enforces typecheck, lint, production build, and a high-severity dependency audit. The Kane workflow authenticates non-interactively with GitHub Secrets, runs the local and production flows, and uploads Kane output as a workflow artifact.
 
 ## Deployment
 
@@ -104,13 +106,7 @@ npm run build
 
 Vercel detects the Vite framework and serves the generated `dist/` output. The stable project domain above should be used for the hackathon live URL.
 
-### GitHub Pages — fallback deployment
-
-ProofLoop also retains the GitHub Pages workflow as a backup deployment path:
-
-**https://pawansatoshi.github.io/ProofLoop/**
-
-GitHub Pages must have **Settings → Pages → Source → GitHub Actions** enabled once for the repository. After that, pushes to `main` build and deploy `dist/` automatically.
+GitHub Pages is not part of the release gate. The repository intentionally relies on Vercel as the single judge-facing production deployment so an unconfigured Pages environment cannot create a false CI failure.
 
 ## Architecture
 
@@ -145,7 +141,6 @@ ProofLoop/
 │   └── proofboard_production_test.md
 ├── .github/workflows/
 │   ├── ci.yml
-│   ├── deploy.yml
 │   └── kane.yml
 ├── AGENTS.md
 ├── eslint.config.mjs
@@ -162,7 +157,7 @@ ProofLoop/
 
 ## Security
 
-No Kane credentials are stored in this repository. Kane authentication is managed by the CLI's credential store or GitHub Secrets. Do not commit `.env` files, browser/session credentials, Kane access keys, or generated evidence packs.
+No Kane credentials are stored in this repository. Kane authentication is managed by the CLI's credential store locally or GitHub Actions Secrets in CI. Do not commit `.env` files, browser/session credentials, Kane access keys, or generated evidence packs.
 
 The application has no backend and no production secret requirement.
 
