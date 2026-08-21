@@ -6,10 +6,12 @@
   "scripts": {
     "dev": "vite",
     "typecheck": "tsc -b --pretty false",
-    "build": "npm run typecheck && vite build",
+    "lint": "eslint . --max-warnings 0",
+    "build": "npm run typecheck && npm run lint && vite build",
     "preview": "vite preview",
-    "verify:kane": "kane-cli testmd run .testmuai/tests/proofboard_release_test.md",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+    "verify:kane": "kane-cli testmd run .testmuai/tests/proofboard_release_test.md --agent --headless --on-lock-conflict wait --retry",
+    "verify:kane:production": "kane-cli testmd run .testmuai/tests/proofboard_production_test.md --agent --headless --on-lock-conflict wait --retry",
+    "verify:loop": "node scripts/kane-loop.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
@@ -20,8 +22,10 @@
     "vite": "latest"
   },
   "devDependencies": {
+    "@eslint/js": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "eslint": "latest"
+    "eslint": "latest",
+    "typescript-eslint": "latest"
   }
 }
