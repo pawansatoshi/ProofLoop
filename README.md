@@ -30,10 +30,22 @@ The control center presents:
 - release gate state,
 - verification history,
 - evidence ledger,
-- repair-loop visualization,
+- agent ↔ Kane repair-loop visualization,
 - the real ProofBoard target.
 
-A controlled failure → repair → re-verification interaction is included for a reproducible demo narrative. **Controlled demo results are explicitly not represented as genuine Kane evidence.** Genuine evidence comes only from an actual Kane execution.
+Controlled demo fixtures are explicitly separated from genuine Kane evidence and can never approve the release. Genuine release proof is accepted only from actual Kane execution.
+
+## Agent ↔ Kane loop
+
+The repository includes `npm run verify:loop` as the agent-facing verification entry point. It runs Kane in `--agent --headless` mode, preserves the NDJSON stream under `.testmuai/output/`, and returns a non-zero status on failure so the coding agent can inspect the evidence, fix the root cause, and rerun the same command.
+
+`AGENTS.md` defines the expected loop:
+
+```text
+agent change → Kane run → structured result/evidence → root-cause fix → Kane rerun → regression proof
+```
+
+An optional `KANE_REPAIR_COMMAND` can be supplied by an agent environment when unattended repair is supported. The project never treats simulated output as proof.
 
 ## Kane test definitions
 
@@ -43,7 +55,6 @@ Run locally:
 
 ```bash
 npm install
-git status
 npm run dev
 ```
 
@@ -57,20 +68,25 @@ kane-cli login
 npm run verify:kane
 ```
 
-For production verification, run the committed production flow with the Vercel URL in `.testmuai/tests/proofboard_production_test.md`.
+For production verification:
 
-Every genuine Kane run produces result/evidence artifacts. Do not treat the UI's controlled demo state as a substitute for those artifacts.
+```bash
+npm run verify:kane:production
+```
+
+Every genuine Kane run can produce machine-readable result/evidence artifacts. Do not treat the UI's controlled demo state as a substitute for those artifacts.
 
 ## Build and verification
 
 ```bash
 npm install
 npm run typecheck
+npm run lint
 npm run build
-npm run preview
+npm run verify:loop
 ```
 
-The GitHub Actions CI workflow runs dependency installation, TypeScript verification, and the production build on pushes and pull requests targeting `main`.
+The GitHub Actions CI workflow enforces typecheck, lint, production build, and a high-severity dependency audit. The manual Kane workflow authenticates with GitHub Secrets, runs the local and production flows, and uploads Kane output as a workflow artifact.
 
 ## Deployment
 
@@ -99,17 +115,20 @@ GitHub Pages must have **Settings → Pages → Source → GitHub Actions** enab
 ## Architecture
 
 ```text
-Requirement
+AI coding agent
     |
     v
-ProofBoard application
+ProofBoard change
     |
     v
-Kane CLI browser verification
+Kane CLI (--agent --headless)
     |
-    +---- PASS ----> Evidence ----> Release approved
+    +---- PASS ----> genuine evidence ----> release gate
     |
-    +---- FAIL ----> Evidence ----> Agent repair ----> Kane re-verification
+    +---- FAIL ----> NDJSON/evidence ----> agent root-cause fix
+                                      |
+                                      v
+                                 Kane re-run
 ```
 
 ## Project structure
@@ -119,6 +138,8 @@ ProofLoop/
 ├── src/
 │   ├── main.tsx
 │   └── styles.css
+├── scripts/
+│   └── kane-loop.mjs
 ├── .testmuai/tests/
 │   ├── proofboard_release_test.md
 │   └── proofboard_production_test.md
@@ -126,6 +147,8 @@ ProofLoop/
 │   ├── ci.yml
 │   ├── deploy.yml
 │   └── kane.yml
+├── AGENTS.md
+├── eslint.config.mjs
 ├── .env.example
 ├── HACKATHON_REQUIREMENTS.md
 ├── BUILD_STATUS.md
@@ -139,7 +162,7 @@ ProofLoop/
 
 ## Security
 
-No Kane credentials are stored in this repository. Kane authentication is managed by the CLI's credential store. Do not commit `.env` files, browser/session credentials, Kane access keys, or generated evidence packs.
+No Kane credentials are stored in this repository. Kane authentication is managed by the CLI's credential store or GitHub Secrets. Do not commit `.env` files, browser/session credentials, Kane access keys, or generated evidence packs.
 
 The application has no backend and no production secret requirement.
 
@@ -147,14 +170,15 @@ The application has no backend and no production secret requirement.
 
 Before submitting, verify all of the following with real evidence:
 
-- [ ] Repository is public or judges have access
+- [x] Repository is public or judges have access
 - [x] README contains setup instructions
 - [x] ProofBoard primary flow is implemented end-to-end
 - [ ] Kane CLI has actually run against the app
 - [ ] Genuine Kane result/evidence pack has been reviewed
 - [ ] Agent-triggered Kane run and Kane-result-driven repair interaction has been demonstrated
 - [x] Vercel production deployment builds successfully
-- [ ] Vercel production flow has been smoke-tested in a real browser
+- [x] Vercel production endpoint returns HTTP 200
+- [ ] Vercel production CRUD flow has been smoke-tested in a real browser session
 - [ ] Demo video is 3 minutes or less and shows the app plus Kane running
 - [ ] One-paragraph submission explanation is prepared
 - [x] Live URL is available: https://proof-loop-bice.vercel.app/
