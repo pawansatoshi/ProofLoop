@@ -11,6 +11,7 @@
     "preview": "vite preview",
     "verify:kane": "kane-cli testmd run .testmuai/tests/proofboard_release_test.md --agent --headless --on-lock-conflict wait --retry",
     "verify:kane:production": "kane-cli testmd run .testmuai/tests/proofboard_production_test.md --agent --headless --on-lock-conflict wait --retry",
+    "verify:kane:demo": "kane-cli testmd run .testmuai/tests/proofboard_controlled_loop_test.md --agent --headless --on-lock-conflict wait --retry",
     "verify:loop": "node scripts/kane-loop.mjs"
   },
   "dependencies": {
