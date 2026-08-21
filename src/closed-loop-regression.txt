@@ -1,0 +1,2 @@
+TEMPORARY CLOSED-LOOP DEMO MARKER
+The actual R4 regression must be introduced in the deleteTask implementation for this branch, then detected and repaired through genuine Kane evidence. This marker must be removed before any merge to main.
