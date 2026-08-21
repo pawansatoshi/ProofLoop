@@ -20,7 +20,9 @@ for (const line of lines) {
   try {
     const event = JSON.parse(line)
     if (event.type === 'run_end') runEnd = event
-  } catch {}
+  } catch {
+    continue
+  }
 }
 
 if (first.status === 0) {
