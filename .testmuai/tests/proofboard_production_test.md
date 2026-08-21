@@ -2,7 +2,7 @@
 mode: testing
 url: https://proof-loop-bice.vercel.app/
 headless: true
-max_steps: 60
+max_steps: 45
 tags: [proofloop, proofboard, production, smoke]
 ---
 
@@ -28,6 +28,9 @@ Click the project card containing the exact text "Kane Production Proof" if nece
 
 ## Verify dashboard consistency
 Click the "Overview" navigation item. Assert that the ProofLoop dashboard is visible and the requirement matrix contains all five release requirements with these exact titles: "Create project", "Add task", "Complete task", "Delete task", and "Dashboard state". Do not run the controlled demo and do not inject the R4 fault.
+
+## Stop after the production assertions
+After the dashboard consistency assertions pass, stop the verification and report success. Do not open the "Evidence" navigation item, do not wait for an evidence ledger to update, and do not expect the Evidence page to change during this run. The Evidence page is a release-reporting UI and is not a prerequisite for this live smoke test. Do not perform any additional navigation or actions after the dashboard assertions.
 
 ## Production evidence boundary
 This is the genuine production smoke verification only. The controlled R4 demo is a separate test and must not be opened or executed during this run. A successful run means the deployed application flow was directly verified by Kane.
