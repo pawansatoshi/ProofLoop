@@ -21,10 +21,13 @@ Add a task named "Verify release" to the active project. Verify the task appears
 Mark "Verify release" as complete. Verify the task is visibly marked completed.
 
 ## Delete the task
-Delete "Verify release". Verify the task is no longer visible in the task list and the active project remains available.
+Delete "Verify release". Verify the task is no longer visible in the task list.
+
+## Verify project persistence
+Verify that the active project "Kane Release Proof" is still visible and selected in the project list after the task is deleted.
 
 ## Verify dashboard consistency
-Return to Overview. Verify the ProofLoop dashboard is visible, the ProofBoard project remains represented in the workspace, and the requirement matrix still shows the five release requirements: Create project, Add task, Complete task, Delete task, and Dashboard state.
+Return to Overview. Verify the ProofLoop dashboard is visible and the requirement matrix still shows the five release requirements: Create project, Add task, Complete task, Delete task, and Dashboard state.
 
 ## Verify the controlled repair narrative
 Run the controlled demo. Verify the release gate becomes blocked and the failure identifies R4 Delete task as a controlled demo failure. Open Evidence, trigger the demo repair, and verify the interface reports a completed controlled cycle while explicitly stating that genuine Kane evidence is still required.
