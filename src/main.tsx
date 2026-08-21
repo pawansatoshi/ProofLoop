@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
+import { createRoot } from 'react-dom/client'
 import { Activity, ArrowUpRight, Check, CheckCircle2, CircleDashed, Clock3, Code2, FileCheck2, LockKeyhole, Play, Plus, RotateCcw, ShieldCheck, Sparkles, SquareCheckBig, Terminal, Trash2, X, Zap } from 'lucide-react'
 import './styles.css'
 
