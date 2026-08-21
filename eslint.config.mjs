@@ -6,6 +6,12 @@ export default defineConfig({
   files: ['**/*.{js,mjs,ts,tsx}'],
   ignores: ['dist/**', 'node_modules/**', '.testmuai/output/**'],
   extends: [js.configs.recommended, tseslint.configs.recommended],
+  languageOptions: {
+    globals: {
+      console: 'readonly',
+      process: 'readonly',
+    },
+  },
   rules: {
     'no-console': 'off',
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
