@@ -1,6 +1,6 @@
 ---
 mode: testing
-url: https://proof-loop-pawansatoshis-projects.vercel.app/
+url: https://proof-loop-bice.vercel.app/
 headless: true
 max_steps: 60
 tags: [proofloop, proofboard, production, smoke]
@@ -9,7 +9,7 @@ tags: [proofloop, proofboard, production, smoke]
 # ProofBoard production verification
 
 ## Open the deployed application
-Open https://proof-loop-pawansatoshis-projects.vercel.app/ and verify the ProofLoop control center is visible. Click the "Open ProofBoard" button. Verify the ProofBoard page is visible with the heading "Real application surface", a "Project name" input, and a "Create project" button.
+Open https://proof-loop-bice.vercel.app/ and verify the ProofLoop control center is visible. Click the "Open ProofBoard" button. Verify the ProofBoard page is visible with the heading "Real application surface", a "Project name" input, and a "Create project" button.
 
 ## Create a project
 In the Project name input, type exactly "Kane Production Proof". Click "Create project". Assert that a project card containing the exact text "Kane Production Proof" is visible and selected. Inspect the live UI/DOM rather than relying on screenshots.
