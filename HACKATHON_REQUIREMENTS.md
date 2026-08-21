@@ -21,14 +21,14 @@ This file distinguishes repository facts from externally verified submission fac
 - [x] Latest Vercel production deployment reached READY after the release-gate fixes
 - [x] README setup and deployment instructions
 
-## External verification still required
+## External verification
 
-- [ ] Real Kane CLI authentication in GitHub Actions with valid `LT_USERNAME` and `LT_ACCESS_KEY` repository secrets
-- [ ] Real Kane browser execution against ProofBoard
-- [ ] Genuine Kane evidence pack reviewed
+- [x] Real Kane CLI authentication in GitHub Actions with valid `LT_USERNAME` and `LT_ACCESS_KEY` repository secrets
+- [x] Real Kane browser execution against ProofBoard
+- [x] Genuine Kane evidence pack reviewed
 - [ ] Actual agent-triggered Kane run and repair interaction demonstrated
 - [x] Vercel production endpoint verified HTTP 200
-- [ ] Vercel production CRUD flow verified in a real browser session
+- [x] Vercel production CRUD flow verified in a clean real browser session by the production Kane test
 - [ ] 3-minute demo video recorded with the app and Kane running
 - [ ] One-paragraph submission explanation finalized
 - [ ] Submission form completed
@@ -39,12 +39,12 @@ This file distinguishes repository facts from externally verified submission fac
 
 - [x] The repository contains a real interactive ProofBoard flow.
 - [x] A Vercel production deployment is configured and the latest deployment reached READY.
-- [ ] Final deployed CRUD flow verified end-to-end from a clean browser session.
+- [x] Final deployed CRUD flow verified end-to-end from a clean browser session.
 
 ### Verified
 
 - [x] Kane test definitions are committed for local and production flows.
-- [ ] Kane has actually run and produced genuine evidence.
+- [x] Kane has actually run and produced genuine evidence.
 
 ### Closed loop
 
