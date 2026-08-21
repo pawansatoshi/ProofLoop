@@ -7,7 +7,6 @@
     "dev": "vite",
     "typecheck": "tsc -b --pretty false",
     "lint": "eslint . --max-warnings 0",
-    "prebuild": "node scripts/export-lock.mjs",
     "build": "npm run typecheck && npm run lint && vite build",
     "preview": "vite preview",
     "verify:kane": "kane-cli testmd run .testmuai/tests/proofboard_release_test.md --agent --headless --on-lock-conflict wait --retry",
