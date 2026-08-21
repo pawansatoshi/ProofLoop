@@ -29,5 +29,5 @@ Verify that the active project "Kane Release Proof" is still visible and selecte
 ## Verify dashboard consistency
 Return to Overview. Verify the ProofLoop dashboard is visible and the requirement matrix still shows the five release requirements: Create project, Add task, Complete task, Delete task, and Dashboard state.
 
-## Verify the controlled repair narrative
-Run the controlled demo. Verify the release gate becomes blocked and the failure identifies R4 Delete task as a controlled demo failure. Open Evidence, trigger the demo repair, and verify the interface reports a completed controlled cycle while explicitly stating that genuine Kane evidence is still required.
+## Release evidence boundary
+This release test verifies only the real application flow and genuine Kane-verifiable state. Do not run the controlled demo, do not inject the R4 fault, and do not treat demo fixtures as release evidence. The controlled repair narrative is intentionally isolated from this release gate.
