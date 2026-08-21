@@ -28,6 +28,7 @@ function App() {
   const [activeTab, setActiveTab] = useState<'overview' | 'proofboard' | 'requirements' | 'evidence'>('overview')
   const [toast, setToast] = useState('')
   const [demo, setDemo] = useState<'idle' | 'failing' | 'repairing' | 'verified'>('idle')
+  const [controlledR4, setControlledR4] = useState(false)
   const [projects, setProjects] = useState<Project[]>([])
   const [activeProjectId, setActiveProjectId] = useState<string | null>(null)
   const [projectName, setProjectName] = useState('')
@@ -95,13 +96,14 @@ function App() {
 
   function deleteTask(taskId: string) {
     if (!activeProject) return
-    const faultInjected = import.meta.env.DEV && new URLSearchParams(window.location.search).get('fault') === 'r4'
+    const faultInjected = controlledR4 || (import.meta.env.DEV && new URLSearchParams(window.location.search).get('fault') === 'r4')
     setProjects(current => current.map(project => project.id === activeProject.id ? { ...project, tasks: faultInjected ? project.tasks : project.tasks.filter(task => task.id !== taskId) } : project))
     if (!faultInjected) setDeletedTaskCount(count => count + 1)
     setToast(faultInjected ? 'Controlled R4 fault injected for agent/Kane demo.' : 'Task deleted from the active project.')
   }
 
   function startDemo() {
+    setControlledR4(true)
     setDemo('failing')
     setToast('Controlled failure reproduced. This demo cannot approve release.')
     setRuns(rs => [{ id: `demo-${Date.now()}`, label: 'Controlled failure demo', status: 'failed', time: 'Just now', detail: 'R4 failure fixture; excluded from release evidence.', source: 'demo' }, ...rs])
@@ -110,6 +112,7 @@ function App() {
   function repairDemo() {
     setDemo('repairing')
     window.setTimeout(() => {
+      setControlledR4(false)
       setDemo('verified')
       setRuns(rs => [{ id: `demo-${Date.now()}`, label: 'Controlled repair demo', status: 'passed', time: 'Just now', detail: 'Demo recovered; still excluded from release evidence.', source: 'demo' }, ...rs])
       setToast('Demo repaired. Run real Kane for release proof.')
@@ -120,6 +123,7 @@ function App() {
     setRequirements(initialRequirements)
     setRuns(initialRuns)
     setDemo('idle')
+    setControlledR4(false)
     setProjects([])
     setActiveProjectId(null)
     setProjectName('')

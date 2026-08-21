@@ -12,7 +12,7 @@ let devProcess = null
 
 async function appIsReady() {
   try {
-    const response = await fetch(localUrl, { signal: AbortSignal.timeout(2500) })
+    const response = await globalThis.fetch(localUrl, { signal: globalThis.AbortSignal.timeout(2500) })
     return response.ok
   } catch {
     return false
@@ -32,7 +32,7 @@ async function ensureLocalApp() {
   const deadline = Date.now() + 20000
   while (Date.now() < deadline) {
     if (await appIsReady()) return
-    await new Promise(resolve => setTimeout(resolve, 500))
+    await new Promise(resolve => globalThis.setTimeout(resolve, 500))
   }
 
   throw new Error(`Local ProofLoop app did not become ready at ${localUrl}`)
@@ -40,7 +40,7 @@ async function ensureLocalApp() {
 
 function cleanup() {
   if (!devProcess?.pid) return
-  try { process.kill(-devProcess.pid, 'SIGTERM') } catch {}
+  try { process.kill(-devProcess.pid, 'SIGTERM') } catch { /* intentionally ignored */ }
   devProcess = null
 }
 
@@ -65,7 +65,7 @@ function parseRunEnd(stdout) {
     try {
       const event = JSON.parse(line)
       if (event.type === 'run_end') runEnd = event
-    } catch {}
+    } catch { /* intentionally ignored */ }
   }
   return runEnd
 }
