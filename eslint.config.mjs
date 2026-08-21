@@ -8,12 +8,20 @@ export default defineConfig({
   extends: [js.configs.recommended, tseslint.configs.recommended],
   languageOptions: {
     globals: {
+      AbortSignal: 'readonly',
+      URL: 'readonly',
+      URLSearchParams: 'readonly',
       console: 'readonly',
+      document: 'readonly',
+      fetch: 'readonly',
       process: 'readonly',
+      setTimeout: 'readonly',
+      window: 'readonly',
     },
   },
   rules: {
     'no-console': 'off',
+    'no-empty': ['error', { allowEmptyCatch: true }],
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
   },
 })
