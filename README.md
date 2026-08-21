@@ -2,7 +2,21 @@
 
 > **AI builds. Kane verifies. Evidence decides.**
 
-ProofLoop is an evidence-based release gate for AI-built software. It pairs a real browser-testable mini application with requirement-level verification so a release is based on observable behavior rather than an agent saying "done".
+ProofLoop is an evidence-first release verification system for AI-built software. It pairs a real browser-testable application with requirement-level Kane verification so a release decision is based on observable behavior and machine-readable evidence rather than an agent simply saying "done".
+
+## Demo
+
+**3-minute product demo:**
+
+https://youtu.be/INqey2G9wac
+
+**Live production app:**
+
+https://proof-loop-bice.vercel.app/
+
+**GitHub repository:**
+
+https://github.com/pawansatoshi/ProofLoop
 
 ## The problem
 
@@ -20,7 +34,7 @@ ProofBoard is the real application surface used as the browser verification targ
 4. Delete the task
 5. Return to the dashboard and verify the workspace remains consistent
 
-The state is intentionally local and deterministic so the full flow can be exercised without external services or credentials.
+The state is intentionally local and deterministic so the complete flow can be exercised without external services or credentials.
 
 ### ProofLoop control center
 
@@ -47,9 +61,9 @@ agent change → Kane run → structured result/evidence → root-cause fix → 
 
 An optional `KANE_REPAIR_COMMAND` can be supplied by an agent environment when unattended repair is supported. The project never treats simulated output as proof.
 
-## Kane test definitions
+## Kane verification
 
-Kane CLI test definitions live under `.testmuai/tests/` using Kane's `test.md` format. The repository includes both a local verification flow and a production Vercel smoke flow.
+Kane CLI test definitions live under `.testmuai/tests/` using Kane's `test.md` format. The repository contains both a local verification flow and a production smoke flow targeting the canonical Vercel deployment.
 
 Run locally:
 
@@ -76,7 +90,7 @@ npm run verify:kane:production
 
 In CI, Kane uses `LT_USERNAME` and `LT_ACCESS_KEY` GitHub Actions secrets and passes them directly to the headless test command; no interactive login is used.
 
-Every genuine Kane run can produce machine-readable result/evidence artifacts. Do not treat the UI's controlled demo state as a substitute for those artifacts.
+Every genuine Kane run can produce machine-readable result/evidence artifacts. The UI's controlled demo state is never a substitute for those artifacts.
 
 ## Build and verification
 
@@ -94,19 +108,17 @@ The GitHub Actions CI workflow enforces typecheck, lint, production build, and a
 
 ### Vercel — primary production deployment
 
-ProofLoop is deployed as a Vite application on Vercel. The current production project is:
+ProofLoop is deployed as a Vite application on Vercel. The judge-facing production URL is:
 
 **https://proof-loop-bice.vercel.app/**
 
-The Vercel project uses the repository's `main` branch and the existing production build command:
+The Vercel project follows the repository's `main` branch and uses:
 
 ```text
 npm run build
 ```
 
-Vercel detects the Vite framework and serves the generated `dist/` output. The stable project domain above should be used for the hackathon live URL.
-
-GitHub Pages is not part of the release gate. The repository intentionally relies on Vercel as the single judge-facing production deployment so an unconfigured Pages environment cannot create a false CI failure.
+Vercel detects the Vite framework and serves the generated `dist/` output. GitHub Pages is not part of the release gate; Vercel is the single judge-facing production deployment.
 
 ## Architecture
 
@@ -161,23 +173,31 @@ No Kane credentials are stored in this repository. Kane authentication is manage
 
 The application has no backend and no production secret requirement.
 
-## Submission checklist
+## Hackathon submission status
 
-Before submitting, verify all of the following with real evidence:
+The project has been submitted to the Kane CLI Online Hackathon.
 
-- [x] Repository is public or judges have access
-- [x] README contains setup instructions
-- [x] ProofBoard primary flow is implemented end-to-end
-- [ ] Kane CLI has actually run against the app
-- [ ] Genuine Kane result/evidence pack has been reviewed
-- [ ] Agent-triggered Kane run and Kane-result-driven repair interaction has been demonstrated
-- [x] Vercel production deployment builds successfully
-- [x] Vercel production endpoint returns HTTP 200
-- [ ] Vercel production CRUD flow has been smoke-tested in a real browser session
-- [ ] Demo video is 3 minutes or less and shows the app plus Kane running
-- [ ] One-paragraph submission explanation is prepared
-- [x] Live URL is available: https://proof-loop-bice.vercel.app/
-- [ ] Repository history satisfies the hackathon's post-kickoff requirement
+- **Demo video:** https://youtu.be/INqey2G9wac
+- **Live URL:** https://proof-loop-bice.vercel.app/
+- **Repository:** https://github.com/pawansatoshi/ProofLoop
+- **Primary lane:** Verification baked into your workflow
+
+### Verified implementation and evidence
+
+- [x] Public repository
+- [x] ProofBoard primary CRUD flow
+- [x] Local Kane verification definition
+- [x] Production Kane verification definition targeting Vercel
+- [x] Agent-facing `npm run verify:loop` entry point
+- [x] GitHub Actions Kane workflow with authenticated headless execution
+- [x] Genuine Kane browser execution and evidence pack reviewed
+- [x] Vercel production endpoint verified
+- [x] Vercel production CRUD flow verified through the committed production Kane flow
+- [x] Demo video recorded and submitted
+- [x] Submission form completed
+- [x] Repository history is within the hackathon kickoff window
+
+The remaining distinction is important: a controlled UI failure is a demonstration fixture, not Kane proof. The release gate relies on genuine Kane execution and evidence.
 
 ## Demo thesis
 
