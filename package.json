@@ -14,18 +14,18 @@
     "verify:loop": "node scripts/kane-loop.mjs"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "latest",
     "lucide-react": "^1.33.0",
-    "react": "latest",
-    "react-dom": "latest",
-    "typescript": "latest",
-    "vite": "latest"
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
   },
   "devDependencies": {
-    "@eslint/js": "latest",
+    "@eslint/js": "10.8.1",
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "eslint": "latest",
-    "typescript-eslint": "latest"
+    "@vitejs/plugin-react": "6.0.5",
+    "eslint": "10.8.1",
+    "typescript": "7.0.2",
+    "typescript-eslint": "8.67.0",
+    "vite": "8.2.2"
   }
 }
