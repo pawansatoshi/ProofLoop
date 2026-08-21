@@ -1,26 +1,29 @@
 ---
 mode: testing
 url: http://127.0.0.1:5173/
-max_steps: 40
-tags: [proofloop, release, smoke]
+max_steps: 45
+tags: [proofloop, proofboard, release, smoke]
 ---
 
 # ProofBoard release verification
 
-## Open ProofLoop
-Open http://127.0.0.1:5173/ and verify the ProofLoop control center is visible.
+## Open the real ProofBoard
+Open http://127.0.0.1:5173/ and verify the ProofLoop control center is visible. Open the ProofBoard view and verify the real application surface is visible.
 
-## Verify the requirement matrix
-Verify that the page shows five requirements: Create project, Add task, Complete task, Delete task, and Dashboard state.
+## Create a project
+Create a project named "Kane Release Proof". Verify the project appears in the project list and is selected as the active project.
 
-## Exercise the verification demo
-Click the "Run verification demo" button and verify that a controlled verification failure is shown and the release gate becomes blocked.
+## Add a task
+Add a task named "Verify release" to the active project. Verify the task appears in the task list.
 
-## Inspect failure evidence
-Open the Evidence view and verify that the failure context identifies R4 Delete task and explains that the task remained visible after deletion.
+## Complete the task
+Mark "Verify release" as complete. Verify the task is visibly marked completed.
 
-## Run the repair loop
-Trigger the available repair and re-verification action. Verify that the interface reports the repair loop and returns to a fully proven state.
+## Delete the task
+Delete "Verify release". Verify the task is no longer visible in the task list and the active project remains available.
 
-## Verify release approval
-Verify that the release gate reports 5/5 proven and RELEASE APPROVED after the repair completes.
+## Verify dashboard consistency
+Return to Overview. Verify the ProofLoop dashboard is visible, the ProofBoard project remains represented in the workspace, and the requirement matrix still shows the five release requirements: Create project, Add task, Complete task, Delete task, and Dashboard state.
+
+## Verify the controlled repair narrative
+Run the controlled demo. Verify the release gate becomes blocked and the failure identifies R4 Delete task as a controlled demo failure. Open Evidence, trigger the demo repair, and verify the interface reports a completed controlled cycle while explicitly stating that genuine Kane evidence is still required.
