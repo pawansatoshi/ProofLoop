@@ -37,7 +37,7 @@ A controlled failure → repair → re-verification interaction is included for 
 
 ## Kane test definitions
 
-Kane CLI test definitions live under `.testmuai/tests/` using Kane's `test.md` format. The repository test exercises the real ProofBoard CRUD flow and the controlled repair narrative.
+Kane CLI test definitions live under `.testmuai/tests/` using Kane's `test.md` format. The repository includes both a local verification flow and a production Vercel smoke flow.
 
 Run locally:
 
@@ -57,6 +57,8 @@ kane-cli login
 npm run verify:kane
 ```
 
+For production verification, run the committed production flow with the Vercel URL in `.testmuai/tests/proofboard_production_test.md`.
+
 Every genuine Kane run produces result/evidence artifacts. Do not treat the UI's controlled demo state as a substitute for those artifacts.
 
 ## Build and verification
@@ -72,7 +74,23 @@ The GitHub Actions CI workflow runs dependency installation, TypeScript verifica
 
 ## Deployment
 
-ProofLoop is configured for GitHub Pages through `.github/workflows/deploy.yml`. The production site is intended to be available at:
+### Vercel — primary production deployment
+
+ProofLoop is deployed as a Vite application on Vercel. The current production project is:
+
+**https://proof-loop-bice.vercel.app/**
+
+The Vercel project uses the repository's `main` branch and the existing production build command:
+
+```text
+npm run build
+```
+
+Vercel detects the Vite framework and serves the generated `dist/` output. The stable project domain above should be used for the hackathon live URL.
+
+### GitHub Pages — fallback deployment
+
+ProofLoop also retains the GitHub Pages workflow as a backup deployment path:
 
 **https://pawansatoshi.github.io/ProofLoop/**
 
@@ -102,10 +120,12 @@ ProofLoop/
 │   ├── main.tsx
 │   └── styles.css
 ├── .testmuai/tests/
-│   └── proofboard_release_test.md
+│   ├── proofboard_release_test.md
+│   └── proofboard_production_test.md
 ├── .github/workflows/
 │   ├── ci.yml
-│   └── deploy.yml
+│   ├── deploy.yml
+│   └── kane.yml
 ├── .env.example
 ├── HACKATHON_REQUIREMENTS.md
 ├── BUILD_STATUS.md
@@ -128,13 +148,16 @@ The application has no backend and no production secret requirement.
 Before submitting, verify all of the following with real evidence:
 
 - [ ] Repository is public or judges have access
-- [ ] README contains setup instructions
-- [ ] ProofBoard primary flow works end-to-end
+- [x] README contains setup instructions
+- [x] ProofBoard primary flow is implemented end-to-end
 - [ ] Kane CLI has actually run against the app
 - [ ] Genuine Kane result/evidence pack has been reviewed
+- [ ] Agent-triggered Kane run and Kane-result-driven repair interaction has been demonstrated
+- [x] Vercel production deployment builds successfully
+- [ ] Vercel production flow has been smoke-tested in a real browser
 - [ ] Demo video is 3 minutes or less and shows the app plus Kane running
 - [ ] One-paragraph submission explanation is prepared
-- [ ] Live URL or one-command runnable path works in under 30 seconds
+- [x] Live URL is available: https://proof-loop-bice.vercel.app/
 - [ ] Repository history satisfies the hackathon's post-kickoff requirement
 
 ## Demo thesis
